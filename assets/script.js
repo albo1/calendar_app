@@ -1,4 +1,6 @@
 var today = $('#currentDay')
+var currentHour = dayjs().format("HH");
+
 
 function displayTime() {
     var rightNow = dayjs().format('MMM DD, YYYY, [at] hh:mm:ss a')
@@ -6,12 +8,17 @@ function displayTime() {
 }
 setInterval(displayTime, 1000)
 
+$(".time-block").each(function () {
+    var hour = parseInt($(this).attr("id").split("-")[1]);
 
-
-
-
-
-// $('#todayDate').text(today.format('MMM D, YYYY, h:mm:ss a'));
+    if (hour < currentHour) {
+        $(this).addClass("past");
+    } else if (hour > currentHour) {
+        $(this).addClass("future");
+    } else {
+        $(this).addClass("present");
+    }
+});
 
 
 $(function () {
